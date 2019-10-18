@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            FridgeGerald - 
+            {% block title_block %}
+                Home
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        {% include 'fridgeManager/navbar.html' %}
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+</html>
