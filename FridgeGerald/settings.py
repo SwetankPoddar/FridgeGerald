@@ -27,7 +27,10 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 SECRET_KEY = 'dtw5!u8clb@gc(nv4+h1st&-2^0_1g84&$08&)@g8@%vao39x!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'DEBUG' in os.environ:
+    DEBUG = os.environ['DEBUG'] == 'True'
+else:
+    DEBUG = True
 
 ALLOWED_HOSTS = ['hackathon-guts.herokuapp.com', 'localhost', 'www.fridgegerald.me', 'fridgegerald.me']
 
@@ -135,3 +138,14 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATIC_URL = '/static/'
+
+
+if DEBUG == False:
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
