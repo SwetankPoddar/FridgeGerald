@@ -1,7 +1,6 @@
 from urllib.request import urlopen
 import json
 def get_recipes(ingredients):
-    ingredients = ["tomato", "onion", "chicken"]
     server_response = urlopen("https://api.edamam.com/search?q=%s&app_id=24223dfd&app_key=31ccabbde7b6150d99c98d500293a0b3"%("+".join(ingredients))).read()
     loaded_json = json.loads(server_response)
     dict_list = []
