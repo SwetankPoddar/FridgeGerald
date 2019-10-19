@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
 from fridgeManager.models import Fridge, FridgeFoodItem
+from fridgeManager.control import get_recipes
 from datetime import datetime
 
 
@@ -16,12 +17,15 @@ def index(request):
 
 @login_required
 def my_fridge(request):
+    #top_foods = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
+    top_foods = ['tomato', 'potato', 'ketchup']
     context = {
         'content': [
            # 'addToFridge': addToFridgeForm,
            # 'addCategory': addCategoryForm,
            # 'addFoodItem': new_food_item_form,
-            ]
+            ],
+        'recipes': get_recipes(top_foods)
     }
     response = render(request, 'fridgeManager/my_fridge.html', context=context)
     return response

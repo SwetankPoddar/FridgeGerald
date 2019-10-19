@@ -12,6 +12,9 @@
         <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#addFoodModal">
             Add Food
         </button>
+        <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#showRecipeModal">
+            Show me recipes
+        </button>
     </div>
     <hr>
     <table id="fridgeTable" class="table">
@@ -31,23 +34,67 @@
 
 <!-- Modal -->
 <div class="modal fade" id="addFoodModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add a new food item</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{  }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Add to my fridge!</button>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add a new food item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success">Add to my fridge!</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="showRecipeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Recipes base on your fridge</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          {% for recipe in recipes %}
+          <div class="col-sm-12 col-lg-6 col-xl-4">
+            <div class="card text-center" style="width: 18rem;">
+              <img src="{{ recipe.image }}" class="card-img-top" alt="{{ recipe.label }}">
+              <div class="row">
+                <div class="card-body">
+                  <h5 class="card-title">{{ recipe.label }}</h5>
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#ingredients_{{ forloop.counter }}" aria-expanded="true" aria-controls="collapseOne">
+                    Ingredients
+                  </button>
+                  <div id="ingredients_{{ forloop.counter }}" class="collapse text-left">
+                    <ul>
+                      {% for ingredient in recipe.ingredients %}
+                      <li>{{ ingredient.text }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                  <a href="{{ recipe.url }}" class="btn btn-primary" target="_blank">Visit website</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 {% block script_block %}
