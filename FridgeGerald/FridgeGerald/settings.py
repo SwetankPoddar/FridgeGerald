@@ -105,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = 'sign_in'
 LOGIN_REDIRECT_URL = 'index'
 
 

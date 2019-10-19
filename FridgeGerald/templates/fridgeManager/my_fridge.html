@@ -1,0 +1,31 @@
+{% extends 'fridgeManager/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    My Fridge
+{% endblock %}
+
+{% block body_block %}
+<div>
+    <div class="text-center">
+        <h2 class="main font-weight-light">Welcome to your fridge</h2>
+        <button type="button" class="btn btn-success mt-2">Add Food</button>
+    </div>
+    <hr>
+    <table id="fridgeTable" class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Food</th>
+            <th scope="col">Category</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Days Left</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block script_block %}
+<script src="{% static 'js/myFridge.js' %}"></script> 
+{% endblock %}

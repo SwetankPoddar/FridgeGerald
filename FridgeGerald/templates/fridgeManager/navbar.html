@@ -1,4 +1,5 @@
 {% url 'index' as index %}
+{% url 'my_fridge' as my_fridge %}
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/">FridgeGerald</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,8 +10,8 @@
             <li class="nav-item {% ifequal request.path index %}active{% endifequal %}">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">My Fridge</a>
+            <li class="nav-item {% ifequal request.path my_fridge %}active{% endifequal %}">
+                <a class="nav-link" href="{{ my_fridge }}">My Fridge</a>
             </li>
         </ul>
     </div>
