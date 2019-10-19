@@ -6,11 +6,16 @@
 
 {% block body_block %}
     <div class="pt-8 text-center">
-        <h2 class="font-weight-light">Your personal fridge manager</h2>
-        <h1 class="">FridgeGerald</h1>
-        <a class="mt-4 nav-link btn btn-outline-primary btn-lg mx-auto max-w-400" href="#">
-            <i class="fas fa-user pr-2"></i>Sign Up
-        </a>
-        <span>Already have an account? <a href="#">Log In.</a></span>
+        <h2 class="main font-weight-light">Your personal fridge manager</h2>
+        <h1 class="main">FridgeGerald</h1>
+        {% if user.is_authenticated %}
+            <h2 class="main font-weight-light">Welcome {{ user.username }}</h2>
+            <a href="{% url 'logout' %}">Log Out.</a>
+        {% else %}
+            <a class="mt-4 nav-link btn btn-outline-primary btn-lg mx-auto max-w-400" href="{% url 'sign_up' %}">
+                <i class="fas fa-user pr-2"></i>Sign Up
+            </a>
+            <span>Already have an account? <a href="{% url 'sign_in' %}">Log In.</a></span>
+        {% endif %}
     </div>
 {% endblock %}

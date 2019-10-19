@@ -1,0 +1,20 @@
+{% extends 'fridgeManager/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Sign In
+{% endblock %}
+
+{% block body_block %}
+<h1 class="text-center pt-4">Login to FridgeGerald</h1>
+<div class="text-center">
+    <form id="information" method="post" action="{% url 'sign_in' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary mt-4">Sign In</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

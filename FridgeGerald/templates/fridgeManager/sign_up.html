@@ -1,0 +1,23 @@
+{% extends 'fridgeManager/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title_block %}
+    Sign Up
+{% endblock %}
+
+{% block body_block %}
+<h1 class="text-center pt-4">Sign Up for FridgeGerald</h1>
+<div class="text-center">
+    <form id="information" method="post" action="{% url 'sign_up' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Display each form -->
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <!-- Provide a button to click to submit the form. -->
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary mt-4">Sign Up</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

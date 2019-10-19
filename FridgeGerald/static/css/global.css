@@ -22,10 +22,10 @@ html, body {
     padding-top: 8rem;
 }
 @media(min-width:767px){
-    h1 {
+    h1.main {
         font-size: 5em;
     }
-    h2 {
+    h2.main {
         font-size: 4em;
     }
 }
