@@ -29,7 +29,7 @@ SECRET_KEY = 'dtw5!u8clb@gc(nv4+h1st&-2^0_1g84&$08&)@g8@%vao39x!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hackathon-guts.herokuapp.com']
+ALLOWED_HOSTS = ['hackathon-guts.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -88,6 +88,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
 
 
 # Password validation
