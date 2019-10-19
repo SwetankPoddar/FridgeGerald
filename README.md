@@ -2,7 +2,7 @@
 
 Challenge: **SAS**, **Twillo** and **Domain.com**
 
-Hosted on Heroku, domain by Domain.com: [http://fridgegerald.me] (http://fridgegerald.me/) 
+Hosted on Heroku, domain by Domain.com: http://fridgegerald.me
 
 Whenever you go for grocery shopping, do you buy a lot of items and end up throwing them because they have expired? 
 
