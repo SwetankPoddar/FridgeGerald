@@ -4,11 +4,23 @@ $(document).ready( function () {
 
 function loadTable() {
     $('#fridgeTable').DataTable( {
+        "createdRow": function(row, data, dataIndex){
+            console.log(data);
+            if(data['best_before'] <= 2){
+                $(row).addClass('table-danger');
+                // very-close-to-expiry
+            }
+            else if(data['best_before'] <= 5){
+                $(row).addClass('table-warning');
+                // close-to-expiry
+            }
+            
+        },
         ajax: {
             url: '/ajax/get-fridge',
             dataSrc: ''
         },
-        columns: [        
+        columns: [       
             { data: 'name' },
             { data: 'category' },
             { data: 'quantity' },
@@ -27,6 +39,15 @@ function loadTable() {
                     result += ';">'+str+'</span>';
                     return result;
                 },
+                className: 'text-center'
+            },
+            {
+                data: 'id',
+                render: function(id){
+                    id = parseInt(id);
+                    return "<a class='btn delete-consume-btn' href='/delete?id="+id+"'> Consumed / Delete </a>";
+                },
+                bSortable: false,
                 className: 'text-center'
             }
         ],

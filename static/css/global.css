@@ -32,3 +32,16 @@ html, body {
 .max-w-400 {
     max-width: 400px;
 }
+
+.very-close-to-expiry {
+    background-color: red !important;
+    color:white;
+}
+
+.close-to-expiry{
+    background-color: yellow;
+}
+
+.delete-consume-btn {
+    background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
+  }

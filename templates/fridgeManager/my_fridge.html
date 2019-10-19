@@ -9,22 +9,46 @@
 <div>
     <div class="text-center">
         <h2 class="main font-weight-light">Welcome to your fridge</h2>
-        <button type="button" class="btn btn-success mt-2">Add Food</button>
+        <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#addFoodModal">
+            Add Food
+        </button>
     </div>
     <hr>
-    <table id="fridgeTable" class="table table-striped">
+    <table id="fridgeTable" class="table">
         <thead>
             <tr>
             <th scope="col">Food</th>
             <th scope="col">Category</th>
             <th scope="col">Quantity</th>
             <th scope="col">Days Left</th>
+            <th scope="col">Consumed / Delete</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="addFoodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add a new food item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{  }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Add to my fridge!</button>
+        </div>
+      </div>
+    </div>
+
 {% endblock %}
 {% block script_block %}
 <script src="{% static 'js/myFridge.js' %}"></script> 
