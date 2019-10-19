@@ -29,7 +29,7 @@ SECRET_KEY = 'dtw5!u8clb@gc(nv4+h1st&-2^0_1g84&$08&)@g8@%vao39x!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hackathon-guts.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['hackathon-guts.herokuapp.com', 'localhost', 'www.fridgegerald.me', 'fridgegerald.me']
 
 
 # Application definition
