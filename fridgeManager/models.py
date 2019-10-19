@@ -11,15 +11,21 @@ def get_image_path(instance, filename):
 class food_category(models.Model):
     name = models.CharField(max_length=50, unique=True, help_text="The name of the category")
 
+    def __str__(self):
+        return self.name
+
 class food_item(models.Model):
     name = models.CharField(max_length=50, unique=True, help_text="The name of food")
-    duration = models.IntegerField(help_text="How long does this item stay good for?", validators=[MinValueValidator(1)])
-    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     category = models.ForeignKey(food_category, on_delete=models.SET_NULL, null = True)
 
+    def __str__(self):
+        return self.name +' ('+ str(self.category) +')'
 
 class Fridge(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user)+ '\'s fridge'
 
 
 class FridgeFoodItem(models.Model):
@@ -28,6 +34,8 @@ class FridgeFoodItem(models.Model):
     quantity = models.CharField(max_length=50)
     fridge = models.ForeignKey(Fridge, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.food) +' in '+ str(self.fridge)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -36,4 +44,4 @@ class UserProfile(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return str(self.user)

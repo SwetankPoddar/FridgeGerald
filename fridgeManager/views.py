@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
-from fridgeManager.models import Fridge
+from fridgeManager.models import Fridge, FridgeFoodItem
 from datetime import datetime
 
 
@@ -17,11 +17,24 @@ def index(request):
 @login_required
 def my_fridge(request):
     context = {
-        'content': []
+        'content': [
+           # 'addToFridge': addToFridgeForm,
+           # 'addCategory': addCategoryForm,
+           # 'addFoodItem': new_food_item_form,
+            ]
     }
     response = render(request, 'fridgeManager/my_fridge.html', context=context)
     return response
 
+@login_required
+def delete_from_fridge(request):
+    try:
+        #FridgeFoodItem.
+        pass
+    except FridgeFoodItem.DoesNotExist:
+        messages.warning(request, 'Incorrect item!')
+
+    redirect(reverse("my_fridge"))
 
 @login_required
 def get_fridge(request):
@@ -37,30 +50,35 @@ def get_fridge(request):
 
     items = [
         {
+            'id': 5,
             'name': 'Apple',
             'category': 'Fruit',
             'quantity': '5',
             'best_before': '6'
         },
         {
+            'id': 5,
             'name': 'Pear',
             'category': 'Fruit',
             'quantity': '2',
             'best_before': '3'
         },
         {
+            'id': 5,
             'name': 'Cucumber',
             'category': 'Vegetable',
             'quantity': '1',
             'best_before': '8'
         },
         {
+            'id': 5,
             'name': 'Chicken Breasts',
             'category': 'Meat',
             'quantity': '500g',
             'best_before': '1'
         },
         {
+            'id': 5,
             'name': 'Rice',
             'category': 'Other',
             'quantity': '500g',
