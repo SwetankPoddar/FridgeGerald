@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from fridgeManager.forms import new_food_item_form, UserForm
+from fridgeManager.forms import new_food_item_form, UserForm, UserProfileForm
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -87,11 +87,16 @@ def add_new_item(request):
 def sign_up(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
 
             fridge = Fridge(user=user)
             fridge.save()
@@ -101,8 +106,9 @@ def sign_up(request):
             return redirect('index')
     else:
         user_form = UserForm()
+        profile_form = UserProfileForm()
 
-    context_dict = {'user_form': user_form}
+    context_dict = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, 'fridgeManager/sign_up.html', context_dict)
 
 

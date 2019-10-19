@@ -1,5 +1,5 @@
 from django import forms
-from fridgeManager.models import food_item
+from fridgeManager.models import food_item, UserProfile
 from django.contrib.auth.models import User
 
 
@@ -28,3 +28,11 @@ class UserForm(forms.ModelForm):
             self.add_error('confirm_password', "Password does not match")
 
         return cleaned_data
+
+
+class UserProfileForm(forms.ModelForm):
+    phone_number = forms.CharField(label="Phone number", required=False)
+
+    class Meta:
+        model = UserProfile
+        fields = ('phone_number',)
