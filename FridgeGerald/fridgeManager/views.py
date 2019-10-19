@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from fridgeManager.forms import new_food_item_form
+from django.urls import reverse
+
+
 def index(request):
     response = render(request, 'fridgeManager/index.html', context={})
     return response
@@ -7,7 +10,7 @@ def index(request):
 
 def add_new_item(request):
     
-    newRequest = new_food_item_form(request.POST or None, request = request)
+    newRequest = new_food_item_form(request.POST or None)
 
     if(request.method == "POST"):
         if newRequest.is_valid():
