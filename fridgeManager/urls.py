@@ -9,6 +9,9 @@ urlpatterns = [
     url(r'^logout/$', views.user_logout, name='logout'),
     url(r'^my-fridge$', views.my_fridge, name="my_fridge"),
     url(r'^ajax/get-fridge$', views.get_fridge, name="get_fridge"),
-    url(r'^add_new_item$', views.add_new_item, name="add_new_item"),
+    url(r'^ajax/add_new_food$', views.add_new_food_item, name="add_new_food_item"),
+    url(r'^ajax/add_new_fridge_item$', views.add_new_fridge_item, name="add_new_fridge_item"),
+    url(r'^ajax/add_new_category$', views.add_new_category, name="add_new_category"),
+    url(r'^ajax/my_fridge_forms$', views.my_fridge_forms, name="my_fridge_forms"),
     url(r'^delete$', views.delete_from_fridge,name="delete_from_fridge"),
 ]

@@ -9,13 +9,13 @@ def get_image_path(instance, filename):
     return os.path.join('image_photos', str(instance.id), filename)
 
 class food_category(models.Model):
-    name = models.CharField(max_length=50, unique=True, help_text="The name of the category")
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
 
 class food_item(models.Model):
-    name = models.CharField(max_length=50, unique=True, help_text="The name of food")
+    name = models.CharField(max_length=50, unique=True)
     category = models.ForeignKey(food_category, on_delete=models.SET_NULL, null = True)
 
     def __str__(self):

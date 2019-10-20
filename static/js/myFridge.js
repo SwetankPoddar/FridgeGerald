@@ -3,6 +3,9 @@ $(document).ready( function () {
 } );
 
 function loadTable() {
+    if ($.fn.dataTable.isDataTable('#fridgeTable')) {
+        $('#fridgeTable').DataTable().destroy();
+    }
     $('#fridgeTable').DataTable( {
         "createdRow": function(row, data, dataIndex){
             console.log(data);
@@ -53,4 +56,20 @@ function loadTable() {
         ],
         order: [[ 3, "asc" ]]
     } );
+}
+
+function submitForm(formId, url) {
+    var form = $('#formModal_'+formId).find('form');
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form.serialize(),
+        success: function(){
+            loadTable();
+            $.get('/ajax/my_fridge_forms', '', function(data){
+                $('#forms').html(data);
+            });
+        },
+    });
+
 }

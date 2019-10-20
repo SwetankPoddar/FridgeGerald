@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from fridgeManager.forms import new_food_item_form, UserForm, UserProfileForm
+from fridgeManager.forms import new_food_item_form, UserForm, UserProfileForm, new_fridge_item_form, new_category_form
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -19,18 +19,8 @@ def index(request):
 def my_fridge(request):
     #top_foods = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
     top_foods = ['tomato', 'potato', 'ketchup','chicken']
-    all_forms = []
-    #### New item form
-    form = new_food_item_form()
-    form.action = reverse("add_new_item")
-    form.title = "Add a new item!"
-    form.submitName = "Add a new item"
+    all_forms = get_my_fridge_forms()
 
-    all_forms.append(form)
-    #### add a item to fridge form
-
-
-    #### New category form
     context = {
         'all_forms': all_forms,
         'recipes': get_recipes(top_foods)
@@ -65,15 +55,76 @@ def get_fridge(request):
     return JsonResponse(items, safe=False)
 
 
-def add_new_item(request):
-    
+def add_new_food_item(request):
     newRequest = new_food_item_form(request.POST or None)
 
     if(request.method == "POST"):
         if newRequest.is_valid():
             newRequest = newRequest.save()
     
-    return reverse("my_fridge")
+    return JsonResponse({'status': 'success'})
+
+
+def add_new_fridge_item(request):
+    newRequest = new_fridge_item_form(request.POST or None)
+
+    if(request.method == "POST"):
+        if newRequest.is_valid():
+            newRequest = newRequest.save(commit=False)
+            newRequest.fridge = request.user.fridge
+            newRequest.save()
+    
+    return JsonResponse({'status': 'success'})
+
+
+def add_new_category(request):
+    newRequest = new_category_form(request.POST or None)
+
+    if(request.method == "POST"):
+        if newRequest.is_valid():
+            newRequest = newRequest.save()
+    
+    return JsonResponse({'status': 'success'})
+
+
+def get_my_fridge_forms():
+    all_forms = []
+    #### New item form
+    form = new_food_item_form()
+    form.action = reverse("add_new_food_item")
+    form.title = "Add a new food!"
+    form.submitName = "Add a new food"
+    form.id = "new_food"
+
+    all_forms.append(form)
+    #### add a item to fridge form
+    form = new_fridge_item_form()
+    form.action = reverse("add_new_fridge_item")
+    form.title = "Add a new item!"
+    form.submitName = "Add a new item"
+    form.id = "new_item"
+
+    all_forms.append(form)
+
+
+    #### New category form
+    form = new_category_form()
+    form.action = reverse("add_new_category")
+    form.title = "Add a new category!"
+    form.submitName = "Add a new category"
+    form.id = "new_category"
+
+    all_forms.append(form)
+    return all_forms
+
+
+def my_fridge_forms(request):
+    all_forms = get_my_fridge_forms()
+    context = {
+        'all_forms': all_forms
+    }
+    response = render(request, 'fridgeManager/my_fridge_forms.html', context=context)
+    return response
 
 
 
