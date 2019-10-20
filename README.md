@@ -1,5 +1,7 @@
 ## FridgeGerald
 
+Developed in less than 42 hours at a hackathon,**Do you have GUTS? 2019**.
+
 Challenge: **SAS**, **Twillo** and **Domain.com**
 
 Hosted on Heroku, domain by Domain.com: http://fridgegerald.me
