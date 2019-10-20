@@ -17,8 +17,11 @@ def index(request):
 
 @login_required
 def my_fridge(request):
-    #top_foods = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
-    top_foods = ['tomato', 'potato', 'ketchup','chicken']
+    tmp = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
+    top_foods = []
+    for item in tmp:
+        top_foods.append(item.food.name.replace(' ', '+'))
+
     all_forms = get_my_fridge_forms()
 
     context = {
