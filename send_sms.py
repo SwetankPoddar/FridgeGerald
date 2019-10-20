@@ -1,8 +1,8 @@
 from twilio.rest import Client
 from datetime import datetime
 
-account_sid = 'AC43ec7d297f4045c321c08b462cc02a49'
-auth_token = '4d9cccee000517c2001066e9b053dde4'
+account_sid = os.environ('twilio_account_sid')
+auth_token = os.environ('twilio_auth_token')
 client = Client(account_sid, auth_token)
 
 def send_sms(sendTo, items):
