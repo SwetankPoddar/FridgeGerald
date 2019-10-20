@@ -17,16 +17,10 @@ def index(request):
 
 @login_required
 def my_fridge(request):
-    tmp = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
-    top_foods = []
-    for item in tmp:
-        top_foods.append(item.food.name.replace(' ', '+'))
-
     all_forms = get_my_fridge_forms()
 
     context = {
-        'all_forms': all_forms,
-        'recipes': get_recipes(top_foods)
+        'all_forms': all_forms
     }
     response = render(request, 'fridgeManager/my_fridge.html', context=context)
     return response
@@ -129,6 +123,17 @@ def my_fridge_forms(request):
     response = render(request, 'fridgeManager/my_fridge_forms.html', context=context)
     return response
 
+
+def recipe_modal(request):
+    tmp = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
+    top_foods = []
+    for item in tmp:
+        top_foods.append(item.food.name.replace(' ', '+'))
+    context = {
+        'recipes': get_recipes(top_foods)
+    }
+    response = render(request, 'fridgeManager/recipe_modal.html', context=context)
+    return response
 
 
 def sign_up(request):
