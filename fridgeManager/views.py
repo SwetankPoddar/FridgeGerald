@@ -18,13 +18,21 @@ def index(request):
 @login_required
 def my_fridge(request):
     #top_foods = request.user.fridge.fridgefooditem_set.all().order_by('-best_before')[:5]
-    top_foods = ['tomato', 'potato', 'ketchup']
+    top_foods = ['tomato', 'potato', 'ketchup','chicken']
+    all_forms = []
+    #### New item form
+    form = new_food_item_form()
+    form.action = reverse("add_new_item")
+    form.title = "Add a new item!"
+    form.submitName = "Add a new item"
+
+    all_forms.append(form)
+    #### add a item to fridge form
+
+
+    #### New category form
     context = {
-        'content': [
-           # 'addToFridge': addToFridgeForm,
-           # 'addCategory': addCategoryForm,
-           # 'addFoodItem': new_food_item_form,
-            ],
+        'all_forms': all_forms,
         'recipes': get_recipes(top_foods)
     }
     response = render(request, 'fridgeManager/my_fridge.html', context=context)
@@ -33,62 +41,27 @@ def my_fridge(request):
 @login_required
 def delete_from_fridge(request):
     try:
-        #FridgeFoodItem.
-        pass
+        fridge = request.user.fridge
+        fridgeItem = FridgeFoodItem.objects.get(fridge = fridge, id = request.GET['id'])
+        fridgeItem.delete()
+        messages.success(request, "Sucesfully consumed/deleted!")
     except FridgeFoodItem.DoesNotExist:
         messages.warning(request, 'Incorrect item!')
-
-    redirect(reverse("my_fridge"))
+    finally:
+        return redirect(reverse("my_fridge"))
 
 @login_required
 def get_fridge(request):
     items = []
     for item in request.user.fridge.fridgefooditem_set.all():
-        days = (item.best_before - datetime.now()).days
+        days = (item.best_before - datetime.now().date()).days
         items.append({
+            'id':item.id,
             'name': item.food.name,
             'category': item.food.category.name,
             'quantity': item.quantity,
             'best_before': days
         })
-
-    items = [
-        {
-            'id': 5,
-            'name': 'Apple',
-            'category': 'Fruit',
-            'quantity': '5',
-            'best_before': '6'
-        },
-        {
-            'id': 5,
-            'name': 'Pear',
-            'category': 'Fruit',
-            'quantity': '2',
-            'best_before': '3'
-        },
-        {
-            'id': 5,
-            'name': 'Cucumber',
-            'category': 'Vegetable',
-            'quantity': '1',
-            'best_before': '8'
-        },
-        {
-            'id': 5,
-            'name': 'Chicken Breasts',
-            'category': 'Meat',
-            'quantity': '500g',
-            'best_before': '1'
-        },
-        {
-            'id': 5,
-            'name': 'Rice',
-            'category': 'Other',
-            'quantity': '500g',
-            'best_before': '54'
-        }
-    ]
     return JsonResponse(items, safe=False)
 
 
@@ -99,11 +72,9 @@ def add_new_item(request):
     if(request.method == "POST"):
         if newRequest.is_valid():
             newRequest = newRequest.save()
-            return redirect(reverse("index"))
     
-    newRequest.action = str(reverse('add_new_item'))
-    newRequest.formFor = 'Add a new item to fridge'
-    return render(request, 'fridgeManager/form.html', context={'form': newRequest})
+    return reverse("my_fridge")
+
 
 
 def sign_up(request):

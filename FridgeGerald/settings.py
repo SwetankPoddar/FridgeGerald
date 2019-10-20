@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'fridgeManager',
     'crispy_forms',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [

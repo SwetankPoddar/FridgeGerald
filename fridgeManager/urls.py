@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^my-fridge$', views.my_fridge, name="my_fridge"),
     url(r'^ajax/get-fridge$', views.get_fridge, name="get_fridge"),
     url(r'^add_new_item$', views.add_new_item, name="add_new_item"),
+    url(r'^delete$', views.delete_from_fridge,name="delete_from_fridge"),
 ]

@@ -10,7 +10,7 @@
     <div class="text-center">
         <h2 class="main font-weight-light">Welcome to your fridge</h2>
         <button type="button" class="btn btn-success mt-2" data-toggle="modal" data-target="#addFoodModal">
-            Add Food
+            Add Food to Fridge
         </button>
         <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#showRecipeModal">
             Show me recipes
@@ -31,28 +31,33 @@
         </tbody>
     </table>
 </div>
-
+{% for form in all_forms %}
 <!-- Modal -->
 <div class="modal fade" id="addFoodModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add a new food item</h5>
+        <h5 class="modal-title">{{ form.title }}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      
       <div class="modal-body">
-      </div>
+          <form method="POST" action="{{ form.action }}">
+              {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="submit btn btn-success" value="{{ form.submitName }}">
+          </form>
+          </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Add to my fridge!</button>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal -->
+{% endfor %}
+<!-- Recepie Modal -->
 <div class="modal fade" id="showRecipeModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
@@ -95,6 +100,7 @@
     </div>
   </div>
 </div>
+
 
 {% endblock %}
 {% block script_block %}
