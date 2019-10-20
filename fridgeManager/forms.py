@@ -9,6 +9,19 @@ class new_food_item_form(forms.ModelForm):
         model = food_item
         exclude = ()
 
+class create_category_form(forms.ModelForm):
+
+    class Meta:
+        model = food_category
+        exclude = ()
+
+class add_to_fridge_form(forms.ModelForm):
+
+    class Meta:
+        model = FridgeFoodItem
+        exclude = ()
+
+
 
 class new_fridge_item_form(forms.ModelForm):
 
