@@ -33,7 +33,7 @@
 </div>
 {% for form in all_forms %}
 <!-- Modal -->
-<div class="modal fade" id="addFoodModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="{{ form.modalName }}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,6 +57,7 @@
   </div>
 </div>
 {% endfor %}
+
 <!-- Recepie Modal -->
 <div class="modal fade" id="showRecipeModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-xl" role="document">

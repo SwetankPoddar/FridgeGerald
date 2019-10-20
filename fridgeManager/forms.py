@@ -1,5 +1,5 @@
 from django import forms
-from fridgeManager.models import food_item, UserProfile
+from fridgeManager.models import food_item, UserProfile,food_category,food_item,FridgeFoodItem
 from django.contrib.auth.models import User
 
 
@@ -8,6 +8,19 @@ class new_food_item_form(forms.ModelForm):
     class Meta:
         model = food_item
         exclude = ()
+
+class create_category_form(forms.ModelForm):
+
+    class Meta:
+        model = food_category
+        exclude = ()
+
+class add_to_fridge_form(forms.ModelForm):
+
+    class Meta:
+        model = FridgeFoodItem
+        exclude = ()
+
 
 
 class UserForm(forms.ModelForm):

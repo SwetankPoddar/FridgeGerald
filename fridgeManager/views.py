@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from fridgeManager.forms import new_food_item_form, UserForm, UserProfileForm
+from fridgeManager.forms import new_food_item_form, UserForm, UserProfileForm,add_to_fridge_form,create_category_form
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -25,12 +25,25 @@ def my_fridge(request):
     form.action = reverse("add_new_item")
     form.title = "Add a new item!"
     form.submitName = "Add a new item"
-
+    form.modalName = "createFoodModal"
     all_forms.append(form)
     #### add a item to fridge form
 
+    form = add_to_fridge_form()
+    #form.action = reverse("add_to_fridge")
+    form.title = "Add to fridge"
+    form.submitName = "Add to frdige!"
+    form.modalName = "addFoodToFridgeModal"
 
+    all_forms.append(form)
     #### New category form
+
+    form = create_category_form()
+    #form.action = reverse("create_new_category")
+    form.title = "Create new category"
+    form.submitName = "Create new category!"
+    form.modalName = "createCategoryModal"
+
     context = {
         'all_forms': all_forms,
         'recipes': get_recipes(top_foods)
