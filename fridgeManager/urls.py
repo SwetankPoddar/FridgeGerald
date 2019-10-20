@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^ajax/add_new_fridge_item$', views.add_new_fridge_item, name="add_new_fridge_item"),
     url(r'^ajax/add_new_category$', views.add_new_category, name="add_new_category"),
     url(r'^ajax/my_fridge_forms$', views.my_fridge_forms, name="my_fridge_forms"),
+    url(r'^ajax/recipe_modal$', views.recipe_modal, name="recipe_modal"),
     url(r'^delete$', views.delete_from_fridge,name="delete_from_fridge"),
 ]

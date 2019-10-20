@@ -1,5 +1,6 @@
 $(document).ready( function () {
     loadTable();
+    loadRecipes();
 } );
 
 function loadTable() {
@@ -58,6 +59,12 @@ function loadTable() {
     } );
 }
 
+function loadRecipes(){
+    $.get('/ajax/recipe_modal', '', function(data){
+        $('#recipe').html(data);
+    });
+}
+
 function submitForm(formId, url) {
     var form = $('#formModal_'+formId).find('form');
     $.ajax({
@@ -69,6 +76,7 @@ function submitForm(formId, url) {
             $.get('/ajax/my_fridge_forms', '', function(data){
                 $('#forms').html(data);
             });
+            loadRecipes();
         },
     });
 
