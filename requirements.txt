@@ -1,6 +1,6 @@
 djang==2.2.8
 django-crispy-forms==1.8.0
-Pillow==6.2.0
+Pillow==9.3.0
 pytz==2019.3
 sqlparse==0.3.0
 gunicorn==19.9.0
